@@ -1,0 +1,940 @@
+{
+    "namespace": "server_form",
+    "third_party_server_screen@common.base_screen": {
+        "$screen_content": "server_form.hqgames_main_content",
+        "button_mappings": [
+            {
+                "from_button_id": "button.menu_cancel",
+                "to_button_id": "button.menu_exit",
+                "mapping_type": "global"
+            }
+        ]
+    },
+    "hqgames_main_content": {
+        "type": "panel",
+        "size": [
+            "100%",
+            "100%"
+        ],
+        "controls": [
+            {
+                "server_form_factory": {
+                    "type": "factory",
+                    "control_ids": {
+                        "long_form": "@server_form.hqgamess_long_form",
+                        "custom_form": "@server_form.custom_form"
+                    }
+                }
+            }
+        ]
+    },
+    "hqgamess_long_form": {
+        "type": "panel",
+        "$teleporter": "Teleporter",
+        "$rules": "Rules",
+        "size": [
+            "100%",
+            "100%"
+        ],
+        "controls": [
+            {
+                "long_form@long_form": {
+                    "bindings": [
+                        {
+                            "binding_type": "global",
+                            "binding_condition": "none",
+                            "binding_name": "#title_text",
+                            "binding_name_override": "#title_text"
+                        },
+                        {
+                            "source_property_name": "(((#title_text - $teleporter) = #title_text)  and ((#title_text - $rules) = #title_text))",
+                            "binding_type": "view",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            },
+            {
+                "hqgames_long_form@hqgames_long_form": {
+                    "bindings": [
+                        {
+                            "binding_type": "global",
+                            "binding_condition": "none",
+                            "binding_name": "#title_text",
+                            "binding_name_override": "#title_text"
+                        },
+                        {
+                            "source_property_name": "(not((#title_text - $teleporter) = #title_text))",
+                            "binding_type": "view",
+                            "target_property_name": "#visible"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "hqgames_long_form": {
+        "type": "panel",
+        "anchor_from": "center",
+        "anchor_to": "center",
+        "size": [
+            390,
+            "100% -60px"
+        ],
+        "offset": [
+            0,
+            0
+        ],
+        "orientation": "vertical",
+        "controls": [
+            {
+                "title": {
+                    "type": "panel",
+                    "anchor_from": "top_right",
+                    "anchor_to": "top_right",
+                    "controls": [
+                        {
+                            "title_text": {
+                                "layer": 5,
+                                "type": "label",
+                                "font_type": "MinecraftSeven", 
+                                "text": "#title_text",
+                                "text_alignment": "center",
+                                "font_scale_factor": 0.5,
+                                "anchor_from": "top_middle",
+                                "anchor_to": "top_middle",
+                                "offset": [
+                                    0,  
+                                    -17
+                                ],
+                                "shadow": false,
+                                "bindings": [
+                                    {
+                                        "binding_name": "#title_text",
+                                        "binding_type": "global"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "close_button@server_form.hqgames_close_button": {
+                                "anchor_from": "top_right",
+                                "anchor_to": "top_right",
+                                "offset": [
+                                    3,
+                                    0
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "contents": {
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 2,
+                    "type": "image",
+                    "texture": "textures/ui/hqgames/background",
+                    "keep_ratio": false,
+                    "clips_children": true,
+                    "allow_clipping": true,
+                    "controls": [
+                        {
+                            "add_panel": {
+                                "type": "stack_panel",
+                                "orientation": "horizontal",
+                                "offset": [
+                                    -2,
+                                    0
+                                ],
+                                "anchor_to": "center",
+                                "anchor_from": "center",
+                                "size": [
+                                    "100% -30px",
+                                    "100%"
+                                ],
+                                "controls": [
+                                    {
+                                        "hqgames_scroll_panel@hqgames_scroll_panel": {}
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "hqgames_scroll_panel": {
+        "type": "image",
+        "size": [
+            "fill",
+            "100%"
+        ],
+        "layer": 2,
+        "controls": [
+            {
+                "hqgames_scroll_panel_pane@hqgames_scroll_panel_pane": {
+                    "size": [
+                        "100%", 
+                        "100%"
+                    ]
+                }
+            }
+        ]
+    },
+    "hqgames_scroll_panel_pane@common.scrolling_panel": {
+        "size": [
+            "100%",
+            "100%"
+        ],
+        "anchor_to": "center",
+        "anchor_from": "center",
+        "$show_background": false,
+        "$scrolling_content": "server_form.hqgames_grid",
+        "$scroll_size": [
+            "5px",
+            "100%"
+        ],
+        "$scrolling_pane_size": [
+            "100%",
+            "100%"
+        ],
+        "$scrolling_pane_offset": [
+            0,
+            0
+        ],
+        "$scroll_bar_right_padding_size": [
+            0,
+            0
+        ],
+        "keep_ratio": false
+    },
+    "hqgames_close_button@common.close_button": {
+        "$default_button_alpha": 1,
+        "anchor_from": "top_right",
+        "anchor_to": "top_right",
+        "layer": 6,
+        "controls": [
+            {
+                "default": {
+                    "layer": 2,
+                    "type": "image",
+                    "texture": "textures/ui/hqgames/exit",
+                    "size": [
+                        "100%c",
+                        "100%c"
+                    ],
+                    "controls": [
+                        {
+                            "close@common.close_button_panel": {
+                                "$close_button_texture": "textures/ui/hqgames/exit"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "hover": {
+                    "layer": 3,
+                    "type": "image",
+                    "texture": "textures/ui/hqgames/exit_hover",
+                    "size": [
+                        "100%c",
+                        "100%c"
+                    ],
+                    "controls": [
+                        {
+                            "close@common.close_button_panel": {
+                                "$close_button_texture": "textures/ui/hqgames/exit_hover"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "pressed": {
+                    "layer": 2,
+                    "type": "image",
+                    "texture": "textures/ui/hqgames/exit_hover",
+                    "size": [
+                        "100%c",
+                        "100%c"
+                    ],
+                    "controls": [
+                        {
+                            "close@common.close_button_panel": {
+                                "$close_button_texture": "textures/ui/hqgames/exit_hover"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "hqgames_rclose_button@common.close_button": {
+        "$default_button_alpha": 1,
+        "anchor_from": "top_right",
+        "anchor_to": "top_right",
+        "layer": 6,
+        "offset": [
+            3,
+            -3
+        ],
+        "controls": [
+            {
+                "default": {
+                    "layer": 2,
+                    "type": "image",
+                    "texture": "textures/ui/hqgames/exit",
+                    "size": [
+                        "100%c",
+                        "100%c"
+                    ],
+                    "controls": [
+                        {
+                            "close@common.close_button_panel": {
+                                "$close_button_texture": "textures/ui/hqgames/exit"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "hover": {
+                    "layer": 3,
+                    "type": "image",
+                    "texture": "textures/ui/hqgames/exit_hover",
+                    "size": [
+                        "100%c",
+                        "100%c"
+                    ],
+                    "controls": [
+                        {
+                            "close@common.close_button_panel": {
+                                "$close_button_texture": "textures/ui/hqgames/exit_hover"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "pressed": {
+                    "layer": 2,
+                    "type": "image",
+                    "texture": "textures/ui/hqgames/exit_hover",
+                    "size": [
+                        "100%c",
+                        "100%c"
+                    ],
+                    "controls": [
+                        {
+                            "close@common.close_button_panel": {
+                                "$close_button_texture": "textures/ui/hqgames/exit_hover"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "hqgames_lclose_button@common.close_button": {
+        "$default_button_alpha": 1,
+        "anchor_from": "top_right",
+        "anchor_to": "top_right",
+        "layer": 6,
+        "offset": [
+            0,
+            0
+        ],
+        "controls": [
+            {
+                "default": {
+                    "layer": 2,
+                    "type": "image",
+                    "texture": "textures/ui/hqgames/exit",
+                    "size": [
+                        "100%c",
+                        "100%c"
+                    ],
+                    "controls": [
+                        {
+                            "close@common.close_button_panel": {
+                                "$close_button_texture": "textures/ui/hqgames/exit"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "hover": {
+                    "layer": 3,
+                    "type": "image",
+                    "texture": "textures/ui/hqgames/exit_hover",
+                    "size": [
+                        "100%c",
+                        "100%c"
+                    ],
+                    "controls": [
+                        {
+                            "close@common.close_button_panel": {
+                                "$close_button_texture": "textures/ui/hqgames/exit_hover"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "pressed": {
+                    "layer": 2,
+                    "type": "image",
+                    "texture": "textures/ui/hqgames/exit_hover",
+                    "size": [
+                        "100%c",
+                        "100%c"
+                    ],
+                    "controls": [
+                        {
+                            "close@common.close_button_panel": {
+                                "$close_button_texture": "textures/ui/hqgames/exit_hover"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "hqgames_grid": {
+        "type": "panel",
+        "anchor_from": "top_left",
+        "anchor_to": "top_left",
+        "offset": [
+            5,
+            5
+        ],
+        "size": [
+            "100%",
+            "100%c"
+        ],
+        "texture": "$button_texture",
+        "controls": [
+            {
+                "hqgames_menu_grid@server_form.hqgames_menu_grid": {}
+            }
+        ]
+    },
+    "hqgames_menu_grid": {
+        "type": "grid",
+        "size": [
+            "100%",
+            "100%c"
+        ],
+        "anchor_from": "top_right",
+        "anchor_to": "top_right",
+        "grid_item_template": "server_form.hqgames_button_size",
+        "grid_rescaling_type": "horizontal",
+        "collection_name": "form_buttons",
+        "bindings": [
+            {
+                "binding_name": "#form_button_length",
+                "binding_name_override": "#maximum_grid_items"
+            }
+        ]
+    },
+    "hqgames_button_size": {
+        "type": "panel",
+        "size": [
+            90,
+            90
+        ],
+        "anchor_from": "top_right",
+        "anchor_to": "top_right",
+        "controls": [
+            {
+                "hqgames_button": {
+                    "type": "panel",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "controls": [
+                        {
+                            "button@common.button": {
+                                "anchor_from": "top_left",
+                                "anchor_to": "top_left",
+                                "layer": 2,
+                                "$pressed_button_name": "button.form_button_click",
+                                "controls": [
+                                    {
+                                        "default@server_form.hqgames_buttons": {
+                                            "$button_texture": "textures/ui/hqgames/default_button"
+                                        }
+                                    },
+                                    {
+                                        "hover@server_form.hqgames_buttons": {
+                                            "$button_texture": "textures/ui/hqgames/default_hover"
+                                        }
+                                    },
+                                    {
+                                        "pressed@server_form.hqgames_buttons": {
+                                            "$button_texture": "textures/ui/hqgames/default_pressed"
+                                        }
+                                    }
+                                ],
+                                "bindings": [
+                                    {
+                                        "binding_type": "collection_details",
+                                        "binding_collection_name": "form_buttons"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "hqgames_buttons": {
+        "type": "stack_panel",
+        "anchor_from": "top_left",
+        "anchor_to": "top_left",
+        "offset": [
+            0,
+            14
+        ],
+        "size": [
+            "100%-4px",
+            "100% -4px"
+        ],
+        "orientation": "vertical",
+        "texture": "$button_texture",
+        "controls": [
+            {
+                "menu_icon": {
+                    "size": [
+                        "100%",
+                        "fill"
+                    ],
+                    "layer": 2,
+                    "type": "image",
+                    "texture": "$button_texture",
+                    "controls": [
+                        {
+                            "menu_icon": {
+                                "type": "image",
+                                "layer": 2,
+                                "size": [
+                                    45,
+                                    45
+                                ],
+                                "keep_ratio": true,
+                                "offset": [
+                                    0,
+                                    -8
+                                ],
+                                "bindings": [
+                                    {
+                                        "binding_name": "#form_button_texture",
+                                        "binding_name_override": "#texture",
+                                        "binding_type": "collection",
+                                        "binding_collection_name": "form_buttons"
+                                    },
+                                    {
+                                        "binding_name": "#form_button_texture_file_system",
+                                        "binding_name_override": "#texture_file_system",
+                                        "binding_type": "collection",
+                                        "binding_collection_name": "form_buttons"
+                                    },
+                                    {
+                                        "binding_type": "view",
+                                        "source_property_name": "(not ((#texture = '') or (#texture = 'loading')))",
+                                        "target_property_name": "#visible"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "entry_description_text": {
+                    "size": [
+                        "100%",
+                        0
+                    ],
+                    "layer": 2,
+                    "type": "image",
+                    "controls": [
+                        {
+                            "entry_description_label": {
+                                "type": "label",
+                                "font_type": "default",
+                                "text": "#form_button_text",
+                                "line_padding": 1,
+                                "font_scale_factor": 1,
+                                "text_alignment": "center",
+                                "anchor_from": "top_left",
+                                "anchor_to": "top_left",
+                                "offset": [
+                                    3,
+                                    -28
+                                ],
+                                "size": [
+                                    "100% - 6px",
+                                    "default"
+                                ],
+                                "layer": 5,
+                                "shadow": false,
+                                "bindings": [
+                                    {
+                                        "binding_type": "collection",
+                                        "binding_collection_name": "form_buttons",
+                                        "binding_condition": "none",
+                                        "binding_name": "#form_button_text",
+                                        "binding_name_override": "#form_button_text"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "hqgames_rank_form": {
+        "type": "panel",
+        "anchor_from": "center",
+        "anchor_to": "center",
+        "size": [
+            "70%",
+            "70%"
+        ],
+        "offset": [
+            0,
+            0
+        ],
+        "orientation": "vertical",
+        "controls": [
+            {
+                "title": {
+                    "type": "panel",
+                    "anchor_from": "top_right",
+                    "anchor_to": "top_right",
+                    "controls": [
+                        {
+                            "close_button@server_form.hqgames_rclose_button": {}
+                        }
+                    ]
+                }
+            },
+            {
+                "contents": {
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 2,
+                    "type": "image",
+                    "texture": "textures/ui/hqgames/rank",
+                    "keep_ratio": false
+                }
+            }
+        ]
+    },
+    "hqgames_rules_form": {
+        "type": "panel",
+        "anchor_from": "center",
+        "anchor_to": "center",
+        "size": [
+            "70%",
+            "70%"
+        ],
+        "offset": [
+            0,
+            0
+        ],
+        "orientation": "vertical",
+        "controls": [
+            {
+                "title": {
+                    "type": "panel",
+                    "anchor_from": "top_right",
+                    "anchor_to": "top_right",
+                    "controls": [
+                        {
+                            "close_button@server_form.hqgames_rclose_button": {}
+                        }
+                    ]
+                }
+            },
+            {
+                "contents": {
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 2,
+                    "type": "image",
+                    "texture": "textures/ui/hqgames/rules",
+                    "keep_ratio": false
+                }
+            }
+        ]
+    },
+    "long_form": {
+        "type": "panel",
+        "anchor_from": "center",
+        "anchor_to": "center",
+        "size": [225, 175],
+        "orientation": "vertical",
+        "controls": [
+            {
+                "title": {
+                    "type": "panel",
+                    "anchor_from": "top_right",
+                    "anchor_to": "top_right",
+                    "controls": [
+                        {
+                            "title_text": {
+                                "layer": 5,
+                                "type": "label",
+                                "font_type": "MinecraftSeven",
+                                "text": "#title_text",
+                                "text_alignment": "center",
+                                "font_scale_factor": 0.5,
+                                "anchor_from": "top_middle",
+                                "anchor_to": "top_middle",
+                                "offset": [
+                                    0,
+                                    -28
+                                ],
+                                "shadow": false,
+                                "bindings": [
+                                    {
+                                        "binding_name": "#title_text",
+                                        "binding_type": "global"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "close_button@server_form.hqgames_lclose_button": {
+                                "anchor_from": "top_right",
+                                "anchor_to": "top_right",
+                                "offset": [
+                                    3,
+                                    -13
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "contents": {
+                    "size": [
+                        "100%",
+                        "100% + 25px"
+                    ],
+                    "layer": 2,
+                    "type": "image",
+                    "texture": "textures/ui/hqgames/background",
+                    "keep_ratio": false,
+                    "clips_children": true,
+                    "allow_clipping": true,
+                    "controls": [
+                        {
+                            "add_panel": {
+                                "type": "stack_panel",
+                                "orientation": "horizontal",
+                                "offset": [
+                                    0,
+                                    0
+                                ],
+                                "anchor_to": "top_left",
+                                "anchor_from": "top_left",
+                                "size": [
+                                    "100%",
+                                    "100%"
+                                ],
+                                "controls": [
+                                    {
+                                        "long_form_panel@long_form_panel": {}
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "long_form_panel" : {
+        "type": "stack_panel",
+        "size": ["100%", "100%"],
+        "orientation": "vertical",
+        "layer": 1,
+        "anchor_from": "top_left",
+        "anchor_to": "top_left",
+        "controls": [
+          
+          {
+            "scrolling_panel@common.scrolling_panel": {
+              "anchor_to": "top_left",
+              "anchor_from": "top_left",   
+              "$show_background": false,
+              "size": [ "97%", "89%" ],
+              "$scrolling_content": "server_form.long_form_scrolling_content",
+              "$scroll_size": [ 5, "85%" ],
+              "$scrolling_pane_size": [ "100% - 4px", "100% - 2px" ],
+              "$scrolling_pane_offset": [ 2, 10 ],
+              "$scroll_bar_right_padding_size": [ 0, 0 ]
+            }
+          }
+        ]
+      },
+    "long_form_scrolling_content": {
+        "type": "stack_panel",
+        "size": [ "100% - 4px", "100%c" ],
+        "orientation": "vertical",
+        "anchor_from": "top_left",
+        "anchor_to": "top_left",
+    
+        "controls": [
+          {
+            "label_offset_panel": {
+              "type": "panel",
+              "size": ["100%", "100%c"],
+              "controls": [
+                {
+                  "main_label": {
+                    "type": "label",
+                    "offset": [2,2],
+                    "color": "$main_header_text_color",
+                    "size": ["100%", "default"],
+                    "anchor_from": "top_left",
+                    "anchor_to": "top_left",
+                    "text": "#form_text"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "padding": {
+              "type": "panel",
+              "size": [ "100%", 4 ]
+            }
+          },
+          {
+            "wrapping_panel": {
+              "type": "panel",
+              "size": [ "100%", "100%c" ],
+              "controls": [
+                {
+                  "long_form_dynamic_buttons_panel@server_form.long_form_dynamic_buttons_panel": {}
+                }
+              ]
+            }
+          }
+        ]
+      },
+    "long_form_dynamic_buttons_panel": {
+        "type": "stack_panel",
+        "size": ["100% - 4px", "100%c"],
+        "offset": [2,0],
+        "orientation": "vertical",
+        "anchor_from": "top_middle",
+        "anchor_to": "top_middle",
+    
+        "factory":{
+          "name": "buttons",
+          "control_name": "server_form.dynamic_button"
+        },
+    
+        "collection_name": "form_buttons",
+        "bindings": [
+          {
+            "binding_name": "#form_button_length",
+            "binding_name_override": "#collection_length"
+          }
+        ]
+      },
+    "dynamic_button": {
+        "type": "stack_panel",
+        "size": ["100%", 32],
+        "orientation": "horizontal",
+        "controls":[
+          {
+            "panel_name": {
+              "type": "panel",
+              "size": [34, "100%c"],
+              "bindings": [
+                {
+                  "binding_type": "view",
+                  "source_control_name": "image",
+                  "resolve_sibling_scope": true,
+                  "source_property_name": "(not (#texture = ''))",
+                  "target_property_name": "#visible"
+                }
+              ],
+    
+              "controls": [
+                {
+                  "image": {
+                    "type": "image",
+                    "layer": 2,
+                    "size": [32, 32],
+                    "offset": [-2, 0],
+                    "bindings":[
+                      {
+                        "binding_name": "#form_button_texture",
+                        "binding_name_override": "#texture",
+                        "binding_type": "collection",
+                        "binding_collection_name": "form_buttons"
+                      },
+                      {
+                        "binding_name": "#form_button_texture_file_system",
+                        "binding_name_override": "#texture_file_system",
+                        "binding_type": "collection",
+                        "binding_collection_name": "form_buttons"
+                      },
+                      {
+                        "binding_type": "view",
+                        "source_property_name": "(not ((#texture = '') or (#texture = 'loading')))",
+                        "target_property_name": "#visible"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "form_button@common_buttons.light_text_button": {
+              "$pressed_button_name": "button.form_button_click",
+              "anchor_from": "top_left",
+              "anchor_to": "top_left",
+              "size": [ "fill", 32 ],
+              "$default_button_texture": "textures/ui/hqgames/default_long",
+              "$hover_button_texture": "textures/ui/hqgames/default_hover_long",
+              "$selected_button_texture": "textures/ui/hqgames/default_pressed_long",
+              "$border_visible": false,
+              "$button_text": "#form_button_text",
+              "$button_text_binding_type": "collection",
+              "$button_text_grid_collection_name": "form_buttons",
+              "$button_text_max_size": [ "100%", 20 ],
+              "bindings": [
+                {
+                  "binding_type": "collection_details",
+                  "binding_collection_name": "form_buttons"
+                }
+              ]
+            }
+          }
+        ]
+      }
+}
